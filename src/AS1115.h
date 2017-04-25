@@ -46,6 +46,8 @@ enum AS1115_Register_t
 	KEYB_r = 0x1D
 };
 
+enum AS1115_key_t { KEY_A = 0x1C, KEY_B = 0x1D };
+
 static const uint8_t MCP23017_defaultAddress = 0x00;
 
 class AS1115: public wireUtil<AS1115_Register_t, uint8_t>
@@ -71,7 +73,19 @@ public:
 	uint8_t addressIndex(uint8_t a) {return a + AS1115_defaultAddress;}
 
 	void setIntensity(uint8_t);
-	
+	void setIntensity(uint8_t, uint8_t);
+	void setDecode(uint8_t, bool);
+	void shutdown(bool);
+	void reset();
+	void setScanLimit(uint8_t);
+	void setBlink(bool, uint8_t);
+	void setDigit(uint8_t, uint8_t);
+	void setDigits(uint8_t, uint8_t *);
+	uint8_t getKey(AS1115_key_t);
+	uint16_t getKey();
+	bool testDigits();
+	uint8_t testShort(uint8_t);
+	uint8_t testOpen(uint8_t);
 };
 
 #endif // __AS1115_h_
