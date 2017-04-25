@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "utility/wireUtil.h"
+#include <wireUtil.h>
 
 enum AS1115_Register_t
 {
