@@ -88,14 +88,16 @@ void AS1115::setDigits(uint8_t count, uint8_t *buffer)
 	writeRegisters(DIGIT0_r, buffer, count);
 }
 
-uint8_t AS1115::getKey(AS1115_key_t)
+uint8_t AS1115::getKey(AS1115_key_t reg)
 {
-	return 0;
+	return readRegister((AS1115_Register_t)reg);
 }
 
 uint16_t AS1115::getKey()
 {
-	return 0;
+	uint8_t buf[2];
+	readRegisters(KEYA_r, buf, 2);
+	return ((uint16_t)buf[1]<<8) + (uint16_t)buf[0];
 }
 
 bool AS1115::testDigits()
